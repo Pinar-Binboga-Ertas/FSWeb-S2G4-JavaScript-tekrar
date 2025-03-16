@@ -5,6 +5,7 @@ const pi = 3.14159;
 const sayilar = [
   45, 856, 12.5, 63, 0.02, 154, 2, 54, 78, 61.7, 654, 26, 12.5, 63, 969, 152,
   32, 31, 14, 74, 32, 365.9, 5.2, 45, 76, 20, 27.4, 562, 12.15, 365.85, 45.87,
+
   22, 88, 56.4, 96.45, 23, 56, 332, 361, 713, 321, 258.3, 10, 974.8, 275, 570,
   707, 814, 326, 596, 626, 494, 546, 724.8, 359, 231.4, 883.1, 379.1, 691, 990,
   815.9, 937.1, 837.3, 859, 476, 370.8, 480, 860, 221.1, 78.8, 255, 613, 958,
@@ -50,8 +51,8 @@ function KareninAlani(kenaruzunlugu) {
 	4. Hesaplanan çemberin çevresi döndürülecektir.
 */
 
-function CemberinCevresi(/* kodlar buraya */) {
-  /* kodlar buraya */
+function CemberinCevresi(yaricap) {
+  return 2*pi*yaricap;
 }
 
 /* (Oto test yok) Yukarıdaki CemberinCevresi fonksiyonunu yarıçap = 5 vererek aşağıda çalıştırıp, sonucu konsolda gözlemleyin (console.log)  */
@@ -64,8 +65,8 @@ function CemberinCevresi(/* kodlar buraya */) {
 	4. Hesaplanan çemberin alanı döndürülecektir.
 */
 
-function CemberinAlani(/* kodlar buraya */) {
-  /* kodlar buraya */
+function CemberinAlani(yaricap) {
+  return pi*yaricap*yaricap;
 }
 
 /* (Oto test yok) Yukarıdaki CemberinAlani fonksiyonunu yarıçap = 15 vererek aşağıda çalıştırıp, sonucu konsolda gözlemleyin (console.log)  */
@@ -97,28 +98,65 @@ let ucetambolunenler,
   siralisayilar,
   tekraredensayilar;
 
-// 3a çözümü
+// 3a 
+//sayilar.sort(function(a,b){
+//  return a-b;});
+
+enkucuk=sayilar[0];
+enbuyuk=sayilar[0];
+
+for(const sayi of sayilar) {
+  if(sayi>enbuyuk){
+    enbuyuk=sayi;
+  }
+}
+
+
 
 /* kodlar buraya */
 
 // 3b çözümü:
-
+ucetambolunenler=[];
+//foreach donucez
+//a%3===0=>ucetambolunenler.push(a)
+sayilar.forEach((sayi)=>{
+  if(sayi%3===0){
+    ucetambolunenler.push(sayi);
+  }
+});
 /* kodlar buraya */
 
 // 3c çözümü:
+ucebolunenlerintoplami= ucetambolunenler.reduce((toplam,sayi)=>toplam+sayi,0);
 
 /* kodlar buraya */
 
 // 3d çözümü
+besyuzdenkucuksayilar=sayilar.filter((sayi)=>sayi<500);
 
 /* kodlar buraya */
 
 // 3e çözümü
-
+siralisayilar=besyuzdenkucuksayilar.sort((a,b)=>a-b);
 /* kodlar buraya */
 
 // 3f çözümü
+let tekrarEdenSayilarObje={};
+sayilar.forEach(sayi=>{
+  if(!tekrarEdenSayilarObje[sayi]){
+  tekrarEdenSayilarObje[sayi]= 1;
+  } else{
+tekrarEdenSayilarObje[sayi]++;
+  }
+})
 
+tekraredensayilar = [];
+for(let key in tekrarEdenSayilarObje){
+  const value= tekrarEdenSayilarObje[key];
+  if(value>1){
+    tekraredensayilar.push(`${key} sayısı ${value} kere tekrar edilmiştir`);
+  }
+}
 /* kodlar buraya */
 
 /*  Bu satırın aşağısındaki kodları lütfen değiştirmeyin  */
@@ -140,3 +178,5 @@ module.exports = {
   siralisayilar,
   tekraredensayilar,
 };
+
+
